@@ -1,0 +1,243 @@
+{% extends "base.html" %}
+
+{% block extra_css %}
+<style>
+    .about-content {
+        max-width: 900px;
+        margin: 0 auto;
+    }
+    
+    .about-content h2 {
+        color: #667eea;
+        margin-top: 30px;
+        margin-bottom: 15px;
+    }
+    
+    .about-content h3 {
+        color: #495057;
+        margin-top: 25px;
+        margin-bottom: 10px;
+    }
+    
+    .about-content p {
+        margin-bottom: 15px;
+        line-height: 1.8;
+    }
+    
+    .about-content ul, .about-content ol {
+        margin-left: 30px;
+        margin-bottom: 15px;
+        line-height: 1.8;
+    }
+    
+    .about-content li {
+        margin-bottom: 10px;
+    }
+    
+    .method-box {
+        background: #f8f9fa;
+        border-left: 4px solid #667eea;
+        padding: 20px;
+        border-radius: 5px;
+        margin: 20px 0;
+    }
+    
+    .formula {
+        background: #f8f9fa;
+        padding: 15px;
+        border-radius: 5px;
+        font-family: 'Courier New', monospace;
+        margin: 15px 0;
+        text-align: center;
+        font-size: 1.1em;
+    }
+    
+    .reference {
+        background: #e7f3ff;
+        padding: 15px;
+        border-radius: 5px;
+        margin: 10px 0;
+        font-size: 0.95em;
+    }
+    
+    .highlight {
+        background: #fff3cd;
+        padding: 2px 5px;
+        border-radius: 3px;
+    }
+    
+    code {
+        background: #f8f9fa;
+        padding: 2px 6px;
+        border-radius: 3px;
+        font-family: 'Courier New', monospace;
+        color: #667eea;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="about-content">
+    <h2>📖 About mLS Calculator</h2>
+    
+    <p>
+        The <strong>mLS (landslide-event magnitude)</strong> is a measure used to quantify the size of a landslide event 
+        based on the frequency-size distribution of landslides within an inventory. This tool implements the method 
+        developed by Tanyas, Allstadt, and van Westen (2018) for estimating landslide-event magnitude.
+    </p>
+    
+    <div class="method-box">
+        <h3>🎯 Purpose</h3>
+        <p>
+            This web application provides an accurate and accessible way to estimate landslide-event magnitude from 
+            spatial landslide inventory data. It accepts shapefiles containing landslide polygons and automatically:
+        </p>
+        <ul>
+            <li>Calculates landslide areas from polygon geometries</li>
+            <li>Estimates power-law parameters (cutoff and beta) from the frequency-area distribution</li>
+            <li>Computes the mLS value and its uncertainty</li>
+            <li>Generates visualization of the frequency-area distribution</li>
+        </ul>
+    </div>
+    
+    <h2>🔬 Methodology</h2>
+    
+    <h3>Power-Law Distribution</h3>
+    <p>
+        Landslide size distributions often follow a power-law for medium to large landslides. The relationship can be 
+        expressed as:
+    </p>
+    
+    <div class="formula">
+        p(A) ∝ A<sup>β</sup>
+    </div>
+    
+    <p>
+        Where <code>p(A)</code> is the probability density and <code>A</code> is the landslide area. 
+        The power-law exponent <span class="highlight">β (beta)</span> typically ranges from <strong>-1.4 to -3.4</strong>, 
+        with most inventories showing values around <strong>-2.3 to -2.5</strong>.
+    </p>
+    
+    <h3>Key Parameters</h3>
+    
+    <p><strong>1. Cutoff (x<sub>min</sub>):</strong></p>
+    <p>
+        The minimum landslide size above which the frequency-size distribution follows a power-law. Smaller landslides 
+        often deviate from the power-law due to:
+    </p>
+    <ul>
+        <li>Incomplete mapping</li>
+        <li>Resolution limitations of imagery</li>
+        <li>Physical processes affecting small landslides differently</li>
+    </ul>
+    
+    <p><strong>2. Beta (β):</strong></p>
+    <p>
+        The power-law exponent (scaling parameter) that describes the slope of the frequency-size distribution. 
+        It relates to the cumulative exponent (α) by: <code>α = β - 1</code>
+    </p>
+    
+    <h3>mLS Calculation</h3>
+    <p>
+        The mLS value is calculated using the Northridge earthquake-triggered landslide inventory as a reference. 
+        The formula compares the frequency density at the mid-point of the power-law range between the analyzed 
+        inventory and the Northridge reference.
+    </p>
+    
+    <div class="method-box">
+        <h3>⚠️ Important Notes</h3>
+        <ul>
+            <li>Input areas must be in <strong>square meters (m²)</strong></li>
+            <li>The shapefile must have a defined coordinate reference system (CRS)</li>
+            <li>Geographic coordinates (lat/lon) will be automatically reprojected to UTM for accurate area calculation</li>
+            <li>Very small polygons (< 1 m²) are filtered out</li>
+            <li>Uncertainty calculation requires beta and cutoff error estimates (optional)</li>
+        </ul>
+    </div>
+    
+    <h2>📊 Interpreting Results</h2>
+    
+    <p>
+        The <strong>mLS value</strong> is logarithmic (base 10), similar to earthquake magnitude scales:
+    </p>
+    <ul>
+        <li><strong>mLS < 3:</strong> Small landslide events</li>
+        <li><strong>mLS 3-4:</strong> Moderate landslide events</li>
+        <li><strong>mLS 4-5:</strong> Large landslide events</li>
+        <li><strong>mLS > 5:</strong> Very large landslide events</li>
+    </ul>
+    
+    <p>
+        The <strong>frequency-area distribution plot</strong> shows:
+    </p>
+    <ul>
+        <li><strong>Blue circles:</strong> Observed frequency density values</li>
+        <li><strong>Red line:</strong> Power-law fit for medium to large landslides</li>
+        <li>The plot uses log-log scale to visualize the power-law relationship</li>
+    </ul>
+    
+    <h2>📚 References</h2>
+    
+    <div class="reference">
+        <strong>Primary Reference:</strong><br>
+        Tanyas, H., Allstadt, K.E., and van Westen, C.J., 2018. 
+        An updated method for estimating landslide-event magnitude. 
+        <em>Earth Surface Processes and Landforms</em>, 43(9), pp.1836-1847. 
+        DOI: <a href="https://doi.org/10.1002/esp.4359" target="_blank">10.1002/esp.4359</a>
+    </div>
+    
+    <div class="reference">
+        <strong>Power-Law Estimation:</strong><br>
+        Clauset, A., Shalizi, C.R. and Newman, M.E., 2009. 
+        Power-law distributions in empirical data. 
+        <em>SIAM review</em>, 51(4), pp.661-703. 
+        DOI: <a href="https://doi.org/10.1137/070710111" target="_blank">10.1137/070710111</a>
+    </div>
+    
+    <div class="reference">
+        <strong>Additional Reading:</strong><br>
+        Guzzetti, F., Malamud, B.D., Turcotte, D.L. and Reichenbach, P., 2002. 
+        Power-law correlations of landslide areas in central Italy. 
+        <em>Earth and Planetary Science Letters</em>, 195(3), pp.169-183.
+    </div>
+    
+    <div class="reference">
+        Stark, C.P. and Guzzetti, F., 2009. 
+        Landslide rupture and the probability distribution of mobilized debris volumes. 
+        <em>Journal of Geophysical Research: Earth Surface</em>, 114(F2).
+    </div>
+    
+    <h2>💻 Implementation</h2>
+    
+    <p>
+        This web application is a <strong>Python implementation</strong> of the original MATLAB code. 
+        The original MATLAB code (<code>mLS.m</code>) remains unchanged and is available in the repository. 
+        This Python version provides:
+    </p>
+    <ul>
+        <li>Web-based interface for easy access</li>
+        <li>Automatic shapefile processing and area calculation</li>
+        <li>Optional automatic power-law parameter estimation</li>
+        <li>Interactive visualization of results</li>
+    </ul>
+    
+    <h2>⚖️ License & Citation</h2>
+    
+    <p>
+        If you use this tool or its modified version in your research, please cite the original paper:
+    </p>
+    
+    <div class="method-box">
+        <p style="font-style: italic;">
+            Tanyas, H., K.E. Allstadt, and C.J. van Westen, 2018, 
+            An updated method for estimating landslide-event magnitude, 
+            Earth Surface Processes and Landforms. DOI: 10.1002/esp.4359
+        </p>
+    </div>
+    
+    <p>
+        This software is provided for research and educational purposes. 
+        The Python implementation was created as a supplementary tool to make the method more accessible.
+    </p>
+</div>
+{% endblock %}

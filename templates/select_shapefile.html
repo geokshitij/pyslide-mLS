@@ -1,0 +1,305 @@
+{% extends "base.html" %}
+
+{% block extra_css %}
+<style>
+    .selection-container {
+        max-width: 900px;
+        margin: 0 auto;
+    }
+    
+    .info-box {
+        background: #fff3cd;
+        border-left: 4px solid #ffc107;
+        padding: 20px;
+        border-radius: 5px;
+        margin-bottom: 30px;
+    }
+    
+    .info-box h3 {
+        color: #856404;
+        margin-bottom: 10px;
+    }
+    
+    .shapefiles-list {
+        background: white;
+        border: 1px solid #dee2e6;
+        border-radius: 10px;
+        padding: 30px;
+        margin-bottom: 30px;
+    }
+    
+    .shapefiles-list h3 {
+        color: #495057;
+        margin-bottom: 20px;
+    }
+    
+    .shapefile-option {
+        background: #f8f9fa;
+        border: 2px solid #dee2e6;
+        border-radius: 8px;
+        padding: 20px;
+        margin-bottom: 15px;
+        cursor: pointer;
+        transition: all 0.3s;
+        display: flex;
+        align-items: center;
+    }
+    
+    .shapefile-option:hover {
+        border-color: #667eea;
+        background: #e7f3ff;
+        transform: translateX(5px);
+    }
+    
+    .shapefile-option input[type="radio"] {
+        width: 20px;
+        height: 20px;
+        margin-right: 15px;
+        cursor: pointer;
+    }
+    
+    .shapefile-option.selected {
+        border-color: #667eea;
+        background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+    }
+    
+    .shapefile-info {
+        flex: 1;
+    }
+    
+    .shapefile-name {
+        font-size: 1.2em;
+        font-weight: 500;
+        color: #333;
+        margin-bottom: 5px;
+    }
+    
+    .shapefile-path {
+        font-size: 0.9em;
+        color: #6c757d;
+        font-family: monospace;
+    }
+    
+    .btn {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 15px 40px;
+        border: none;
+        border-radius: 5px;
+        font-size: 1.1em;
+        font-weight: 500;
+        cursor: pointer;
+        transition: transform 0.2s, box-shadow 0.2s;
+        width: 100%;
+    }
+    
+    .btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+    }
+    
+    .btn:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+        transform: none;
+    }
+    
+    .btn-secondary {
+        background: #6c757d;
+        margin-top: 10px;
+    }
+    
+    .btn-secondary:hover {
+        background: #5a6268;
+        box-shadow: 0 5px 15px rgba(108, 117, 125, 0.4);
+    }
+    
+    .parameters-section {
+        background: white;
+        border: 1px solid #dee2e6;
+        border-radius: 10px;
+        padding: 30px;
+        margin-bottom: 30px;
+    }
+    
+    .parameters-section h3 {
+        color: #495057;
+        margin-bottom: 20px;
+    }
+    
+    .form-group {
+        margin-bottom: 20px;
+    }
+    
+    .form-group label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: 500;
+        color: #495057;
+    }
+    
+    .form-group input {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ced4da;
+        border-radius: 5px;
+        font-size: 1em;
+    }
+    
+    .form-group input:focus {
+        outline: none;
+        border-color: #667eea;
+        box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    }
+    
+    .form-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+    }
+    
+    .help-text {
+        font-size: 0.9em;
+        color: #6c757d;
+        margin-top: 5px;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="selection-container">
+    <div class="info-box">
+        <h3>📂 Multiple Shapefiles Found</h3>
+        <p>Your ZIP file contains multiple shapefiles. Please select the one you want to analyze for landslide magnitude calculation.</p>
+    </div>
+    
+    <form method="POST" action="{{ url_for('process_selected') }}" id="selectionForm">
+        <div class="shapefiles-list">
+            <h3>📍 Select Shapefile</h3>
+            
+            {% for shp in shapefiles %}
+            <label class="shapefile-option" for="shp_{{ loop.index }}">
+                <input type="radio" 
+                       name="selected_shapefile" 
+                       id="shp_{{ loop.index }}" 
+                       value="{{ shp }}" 
+                       required
+                       {% if loop.first %}checked{% endif %}>
+                <div class="shapefile-info">
+                    <div class="shapefile-name">
+                        {{ shp.split('/')[-1] }}
+                    </div>
+                    <div class="shapefile-path">
+                        {{ shp }}
+                    </div>
+                </div>
+            </label>
+            {% endfor %}
+        </div>
+        
+        <div class="parameters-section">
+            <h3>⚙️ Optional Parameters</h3>
+            <p class="help-text" style="margin-bottom: 20px;">
+                Leave these fields empty to automatically estimate power-law parameters from your data.
+            </p>
+            
+            {% if original_params %}
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="cutoff">Cutoff (xmin) - m²</label>
+                    <input type="number" name="cutoff" id="cutoff" step="any" 
+                           value="{{ original_params.get('cutoff', '') }}" placeholder="Auto-estimate">
+                    <p class="help-text">Smallest area that follows power law</p>
+                </div>
+                
+                <div class="form-group">
+                    <label for="beta">Beta (β)</label>
+                    <input type="number" name="beta" id="beta" step="any" 
+                           value="{{ original_params.get('beta', '') }}" placeholder="Auto-estimate">
+                    <p class="help-text">Power-law exponent (typically -1.4 to -3.4)</p>
+                </div>
+            </div>
+            
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="cutoff_error">Cutoff Error - m²</label>
+                    <input type="number" name="cutoff_error" id="cutoff_error" step="any" 
+                           value="{{ original_params.get('cutoff_error', '') }}" placeholder="Optional">
+                    <p class="help-text">Uncertainty in cutoff value</p>
+                </div>
+                
+                <div class="form-group">
+                    <label for="beta_error">Beta Error</label>
+                    <input type="number" name="beta_error" id="beta_error" step="any" 
+                           value="{{ original_params.get('beta_error', '') }}" placeholder="Optional">
+                    <p class="help-text">Uncertainty in beta value</p>
+                </div>
+            </div>
+            {% else %}
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="cutoff">Cutoff (xmin) - m²</label>
+                    <input type="number" name="cutoff" id="cutoff" step="any" placeholder="Auto-estimate">
+                    <p class="help-text">Smallest area that follows power law</p>
+                </div>
+                
+                <div class="form-group">
+                    <label for="beta">Beta (β)</label>
+                    <input type="number" name="beta" id="beta" step="any" placeholder="Auto-estimate">
+                    <p class="help-text">Power-law exponent (typically -1.4 to -3.4)</p>
+                </div>
+            </div>
+            
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="cutoff_error">Cutoff Error - m²</label>
+                    <input type="number" name="cutoff_error" id="cutoff_error" step="any" placeholder="Optional">
+                    <p class="help-text">Uncertainty in cutoff value</p>
+                </div>
+                
+                <div class="form-group">
+                    <label for="beta_error">Beta Error</label>
+                    <input type="number" name="beta_error" id="beta_error" step="any" placeholder="Optional">
+                    <p class="help-text">Uncertainty in beta value</p>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+        
+        <button type="submit" class="btn" id="submitBtn">
+            🚀 Calculate mLS
+        </button>
+        
+        <a href="{{ url_for('index') }}" class="btn btn-secondary" style="display: block; text-align: center; text-decoration: none;">
+            ← Upload Different File
+        </a>
+    </form>
+</div>
+
+<script>
+    // Highlight selected option
+    const options = document.querySelectorAll('.shapefile-option');
+    const radios = document.querySelectorAll('input[type="radio"]');
+    
+    radios.forEach(radio => {
+        radio.addEventListener('change', function() {
+            options.forEach(opt => opt.classList.remove('selected'));
+            if (this.checked) {
+                this.closest('.shapefile-option').classList.add('selected');
+            }
+        });
+    });
+    
+    // Set initial selection
+    document.querySelector('input[type="radio"]:checked')?.closest('.shapefile-option').classList.add('selected');
+    
+    // Form submission
+    const form = document.getElementById('selectionForm');
+    const submitBtn = document.getElementById('submitBtn');
+    
+    form.addEventListener('submit', function() {
+        submitBtn.disabled = true;
+        submitBtn.textContent = '⏳ Processing...';
+    });
+</script>
+{% endblock %}
