@@ -1,4 +1,4 @@
-# 🏔️ pyslide-mLS# 🏔️ pyslide-mLS# mLS
+# 🏔️ pyslide-mLS# 🏔️ pyslide-mLS# 🏔️ pyslide-mLS# mLS
 
 
 
@@ -6,7 +6,7 @@
 
 
 
-[![Python](https://img.shields.io/badge/python-3.9%2B-blue.svg)](https://www.python.org/)**Python implementation of the landslide-event magnitude scale (mLS) calculator with web interface**## Introduction
+[![Python](https://img.shields.io/badge/python-3.9%2B-blue.svg)](https://www.python.org/)**Python implementation of the landslide-event magnitude scale (mLS) calculator with web interface**
 
 [![License](https://img.shields.io/badge/license-Public%20Domain-green.svg)](LICENSE.md)
 
@@ -14,39 +14,39 @@
 
 
 
----[![Python](https://img.shields.io/badge/python-3.9%2B-blue.svg)](https://www.python.org/)mLS is a function that estimates the landslide magnitude (mLS) from cutoff 
+---[![Python](https://img.shields.io/badge/python-3.9%2B-blue.svg)](https://www.python.org/)**Python implementation of the landslide-event magnitude scale (mLS) calculator with web interface**## Introduction
 
 
 
-## 📖 Overview[![License](https://img.shields.io/badge/license-Public%20Domain-green.svg)](LICENSE.md)(smallest area that follows power law), beta (power-law exponent), and an 
+## 📖 Overview[![License](https://img.shields.io/badge/license-Public%20Domain-green.svg)](LICENSE.md)
 
 
 
-This repository provides both **MATLAB** and **Python** implementations for estimating landslide-event magnitude (mLS) from landslide inventory shapefiles. The Python version includes a user-friendly **Flask web interface** for easy analysis through your browser.[![Flask](https://img.shields.io/badge/flask-3.0.0-lightgrey.svg)](https://flask.palletsprojects.com/)array of areas derived from a landslide inventory following the methods of 
+This repository provides both **MATLAB** and **Python** implementations for estimating landslide-event magnitude (mLS) from landslide inventory shapefiles. The Python version includes a user-friendly **Flask web interface** for easy analysis through your browser.[![Flask](https://img.shields.io/badge/flask-3.0.0-lightgrey.svg)](https://flask.palletsprojects.com/)
 
 
 
-The methodology follows:Tanyas and others (2018). It can also calculate the uncertainty in 
+The methodology follows:
 
 > **Tanyas, H., K.E. Allstadt, and C.J. van Westen**, 2018. *An updated method for estimating landslide-event magnitude*. Earth Surface Processes and Landforms. DOI: [10.1002/esp.4359](https://doi.org/10.1002/esp.4359)
 
----landslide-event magnitude if uncertainties in cutoff and beta values are 
+---[![Python](https://img.shields.io/badge/python-3.9%2B-blue.svg)](https://www.python.org/)mLS is a function that estimates the landslide magnitude (mLS) from cutoff 
 
 ### What is mLS?
 
-given as input parameters. The function plots the best power-law fit for 
+
 
 **mLS (landslide-event magnitude scale)** is analogous to earthquake magnitude scales but quantifies the overall size/severity of a landslide event. It's calculated from the frequency-area distribution of landslides following power-law statistics.
 
-## 📖 Overviewthe medium and large landslides and the frequency-area distribution of the 
+## 📖 Overview[![License](https://img.shields.io/badge/license-Public%20Domain-green.svg)](LICENSE.md)(smallest area that follows power law), beta (power-law exponent), and an 
 
 - **Input**: Landslide polygon areas from an inventory
 
-- **Output**: analyzed inventory. It also returns the corresponding mLS (landslide-event magnitude)
+- **Output**: 
 
   - mLS value (magnitude scale similar to earthquake scales)
 
-  - Power-law parameters (β exponent, cutoff point)This repository provides both **MATLAB** and **Python** implementations for estimating landslide-event magnitude (mLS) from landslide inventory shapefiles. The Python version includes a user-friendly **Flask web interface** for easy analysis through your browser.value.
+  - Power-law parameters (β exponent, cutoff point)This repository provides both **MATLAB** and **Python** implementations for estimating landslide-event magnitude (mLS) from landslide inventory shapefiles. The Python version includes a user-friendly **Flask web interface** for easy analysis through your browser.[![Flask](https://img.shields.io/badge/flask-3.0.0-lightgrey.svg)](https://flask.palletsprojects.com/)array of areas derived from a landslide inventory following the methods of 
 
   - Uncertainty estimates
 
@@ -54,91 +54,91 @@ given as input parameters. The function plots the best power-law fit for
 
 
 
----The methodology follows:To obtain the cutoff and beta values the method suggested by Clauset et al.(2009) 
+---The methodology follows:Tanyas and others (2018). It can also calculate the uncertainty in 
 
 
 
-## ✨ Features> **Tanyas, H., K.E. Allstadt, and C.J. van Westen**, 2018. *An updated method for estimating landslide-event magnitude*. Earth Surface Processes and Landforms. DOI: [10.1002/esp.4359](https://doi.org/10.1002/esp.4359)can be used. The original scripts (plfit.m and plvar.m) of Clauset et al. (2009)
+## ✨ Features> **Tanyas, H., K.E. Allstadt, and C.J. van Westen**, 2018. *An updated method for estimating landslide-event magnitude*. Earth Surface Processes and Landforms. DOI: [10.1002/esp.4359](https://doi.org/10.1002/esp.4359)
 
 
 
-### Python Web Applicationcan be downloaded from the following link to calculate these parameters: 
+### Python Web Application---landslide-event magnitude if uncertainties in cutoff and beta values are 
 
 - 🌐 **Browser-based interface** - No coding required
 
-- 📁 **Shapefile upload** - Direct ZIP file support### What is mLS?http://www.santafe.edu/~aaronc/powerlaws/ 
+- 📁 **Shapefile upload** - Direct ZIP file support### What is mLS?
 
 - 🔄 **Multiple shapefile handling** - Select from multiple shapefiles in one ZIP
 
-- 📊 **Interactive results** - View plots and statistics in your browser
+- 📊 **Interactive results** - View plots and statistics in your browsergiven as input parameters. The function plots the best power-law fit for 
 
 - 🎯 **Automatic parameter estimation** - Uses Clauset et al. (2009) method
 
-- 📈 **Uncertainty quantification** - Monte Carlo simulation (10,000 iterations)**mLS (landslide-event magnitude scale)** is analogous to earthquake magnitude scales but quantifies the overall size/severity of a landslide event. It's calculated from the frequency-area distribution of landslides following power-law statistics.### To install this function:
+- 📈 **Uncertainty quantification** - Monte Carlo simulation (10,000 iterations)**mLS (landslide-event magnitude scale)** is analogous to earthquake magnitude scales but quantifies the overall size/severity of a landslide event. It's calculated from the frequency-area distribution of landslides following power-law statistics.
 
 - 🗺️ **Automatic CRS handling** - Converts to appropriate projected CRS for area calculation
 
-
+## 📖 Overviewthe medium and large landslides and the frequency-area distribution of the 
 
 ### MATLAB Implementation
 
-- 🔬 **Original reference implementation** - For verification and academic use- **Input**: Landslide polygon areas from an inventoryDownload mLS.m and add it to your matlab path
+- 🔬 **Original reference implementation** - For verification and academic use- **Input**: Landslide polygon areas from an inventory
 
 - 📐 **Direct calculation** - Command-line interface for batch processing
 
-- **Output**: 
+- **Output**: analyzed inventory. It also returns the corresponding mLS (landslide-event magnitude)
 
 ---
 
-  - mLS value (magnitude scale similar to earthquake scales)## Usage example (from mLS.m)
+  - mLS value (magnitude scale similar to earthquake scales)
 
 ## 🚀 Quick Start
 
-  - Power-law parameters (β exponent, cutoff point)
+  - Power-law parameters (β exponent, cutoff point)This repository provides both **MATLAB** and **Python** implementations for estimating landslide-event magnitude (mLS) from landslide inventory shapefiles. The Python version includes a user-friendly **Flask web interface** for easy analysis through your browser.value.
 
 ### Python Web Application
 
-  - Uncertainty estimates```
+  - Uncertainty estimates
 
 1. **Clone the repository**
 
-   ```bash  - Frequency-area distribution plot% Upload the landslide areas, which you want to analyze their frequency-area 
+   ```bash  - Frequency-area distribution plot
 
    git clone https://github.com/geokshitij/pyslide-mLS.git
 
-   cd pyslide-mLS% distribution, as a horizontal array. In this example, we use the sample_data.m
+   cd pyslide-mLS
 
    ```
 
----% file that you can find in the repository. When you open the sample_data.m
+---The methodology follows:To obtain the cutoff and beta values the method suggested by Clauset et al.(2009) 
 
 2. **Run the setup script**
 
-   ```bash% file in the Matlab, you will see the landslide areas array with a parameter name
+   ```bash
 
    chmod +x run.sh
 
-   ./run.sh## ✨ Features% of 'Area'. This is the only input we need to run this code. In addition to that
+   ./run.sh## ✨ Features> **Tanyas, H., K.E. Allstadt, and C.J. van Westen**, 2018. *An updated method for estimating landslide-event magnitude*. Earth Surface Processes and Landforms. DOI: [10.1002/esp.4359](https://doi.org/10.1002/esp.4359)can be used. The original scripts (plfit.m and plvar.m) of Clauset et al. (2009)
 
    ```
 
-% you can also use the uncertainty in the estimated power-law parameters to calculate
+
 
 3. **Open your browser**
 
-   - Navigate to: `http://localhost:5001`### Python Web Application% the uncertainty in mLS. To reach those uncertainty estimates you can open 
+   - Navigate to: `http://localhost:5001`### Python Web Applicationcan be downloaded from the following link to calculate these parameters: 
 
    - Upload your landslide inventory shapefile (as ZIP)
 
-   - View results!- 🌐 **Browser-based interface** - No coding required% the cutoff_error.m and beta_error.m files, and use them as an input of this function.
+   - View results!- 🌐 **Browser-based interface** - No coding required
 
 
 
-### Manual Installation- 📁 **Shapefile upload** - Direct ZIP file support% Noted that this function can be run with or without considering the estimates of 
+### Manual Installation- 📁 **Shapefile upload** - Direct ZIP file support### What is mLS?http://www.santafe.edu/~aaronc/powerlaws/ 
 
 
 
-If the automatic script doesn't work:- 🔄 **Multiple shapefile handling** - Select from multiple shapefiles in one ZIP% uncertainties. 
+If the automatic script doesn't work:- 🔄 **Multiple shapefile handling** - Select from multiple shapefiles in one ZIP
 
 
 
@@ -146,43 +146,43 @@ If the automatic script doesn't work:- 🔄 **Multiple shapefile handling** - Se
 
 # Create virtual environment
 
-python3 -m venv venv- 🎯 **Automatic parameter estimation** - Uses Clauset et al. (2009) method% In the following lines, the bins are defined with an array. We took 2 as 
+python3 -m venv venv- 🎯 **Automatic parameter estimation** - Uses Clauset et al. (2009) method
 
 source venv/bin/activate  # On Windows: venv\Scripts\activate
 
-- 📈 **Uncertainty quantification** - Monte Carlo simulation (10,000 iterations)% the minimum bin size and we used increasing bin sizes. We increase the 
+- 📈 **Uncertainty quantification** - Monte Carlo simulation (10,000 iterations)**mLS (landslide-event magnitude scale)** is analogous to earthquake magnitude scales but quantifies the overall size/severity of a landslide event. It's calculated from the frequency-area distribution of landslides following power-law statistics.### To install this function:
 
 # Install dependencies
 
-pip install -r requirements.txt- 🗺️ **Automatic CRS handling** - Converts to appropriate projected CRS for area calculation% bin widths while the landslide size increases, so that bin widths become
+pip install -r requirements.txt- 🗺️ **Automatic CRS handling** - Converts to appropriate projected CRS for area calculation
 
 
 
-# Run the application% approximately equal in logarithmic coordinates. To create a long array for 
+# Run the application
 
 python app.py
 
-```### MATLAB Implementation% the bins we tentatively pick 120 for the size of x1 vector defined below.
+```### MATLAB Implementation
 
 
 
----- 🔬 **Original reference implementation** - For verification and academic usex1(1,1)=2;
+---- 🔬 **Original reference implementation** - For verification and academic use- **Input**: Landslide polygon areas from an inventoryDownload mLS.m and add it to your matlab path
 
 
 
-## 📂 Repository Structure- 📐 **Direct calculation** - Command-line interface for batch processingfor i=2:120
+## 📂 Repository Structure- 📐 **Direct calculation** - Command-line interface for batch processing
 
 
 
-```    x1(1,i)=x1(1,i-1)*1.2;
+```- **Output**: 
 
 pyslide-mLS/
 
-├── app.py                      # Flask web application---end
+├── app.py                      # Flask web application---
 
 ├── mls_calculator.py           # Core mLS calculation module
 
-├── powerlaw_estimator.py       # Automatic parameter estimationx2=log10(x1);
+├── powerlaw_estimator.py       # Automatic parameter estimation  - mLS value (magnitude scale similar to earthquake scales)## Usage example (from mLS.m)
 
 ├── requirements.txt            # Python dependencies
 
@@ -190,55 +190,55 @@ pyslide-mLS/
 
 ├── static/                     # CSS styles
 
-├── templates/                  # HTML templatesFreq=histc(Area,x1); %Frequency values are calculated for each bin 
+├── templates/                  # HTML templates  - Power-law parameters (β exponent, cutoff point)
 
 │   ├── index.html             # Upload page
 
-│   ├── select_shapefile.html  # Multiple shapefile selection### Python Web Applications=size(x1);
+│   ├── select_shapefile.html  # Multiple shapefile selection### Python Web Application
 
 │   ├── results.html           # Results display
 
-│   └── about.html             # Documentations=s(1,2);
+│   └── about.html             # Documentation  - Uncertainty estimates```
 
 ├── matlab_original/           # Original MATLAB implementation
 
-│   ├── mLS.m                  # MATLAB function1. **Clone the repository**internal=zeros(1,s);
+│   ├── mLS.m                  # MATLAB function1. **Clone the repository**
 
 │   ├── sample_data.mat        # Sample landslide areas
 
-│   ├── beta.mat               # Sample beta value   ```bash
+│   ├── beta.mat               # Sample beta value   ```bash  - Frequency-area distribution plot% Upload the landslide areas, which you want to analyze their frequency-area 
 
 │   ├── beta_error.mat         # Sample beta uncertainty
 
-│   ├── cutoff.mat             # Sample cutoff value   git clone https://github.com/geokshitij/pyslide-mLS.gitfor i=2:s
+│   ├── cutoff.mat             # Sample cutoff value   git clone https://github.com/geokshitij/pyslide-mLS.git
 
 │   └── cutoff_error.mat       # Sample cutoff uncertainty
 
-├── tests/                     # Test scripts and sample data   cd pyslide-mLS     internal(1,i)=x1(1,i)-x1(1,i-1);
+├── tests/                     # Test scripts and sample data   cd pyslide-mLS% distribution, as a horizontal array. In this example, we use the sample_data.m
 
 │   ├── test_matlab_comparison.py
 
-│   ├── test_installation.py   ```end
+│   ├── test_installation.py   ```
 
 │   ├── generate_test_shapefile.py
 
-│   └── *.zip                  # Test shapefilesinternal(1,1)=min(x1);
+│   └── *.zip                  # Test shapefiles---% file that you can find in the repository. When you open the sample_data.m
 
 ├── docs/                      # Additional documentation
 
-└── output/                    # Generated outputs2. **Run the setup script**FD=Freq./internal;
+└── output/                    # Generated outputs2. **Run the setup script**
 
 ```
 
-   ```bash
+   ```bash% file in the Matlab, you will see the landslide areas array with a parameter name
 
 ---
 
-   chmod +x run.shx1_rev = abs(x1-cutoff);    % the index of value that is closest to cutoff value is identified along the x1 array 
+   chmod +x run.sh
 
 ## 📊 Usage
 
-   ./run.sh[indexMidpoint indexMidpoint] = min(x1_rev);
+   ./run.sh## ✨ Features% of 'Area'. This is the only input we need to run this code. In addition to that
 
 ### Web Interface
 
@@ -246,31 +246,31 @@ pyslide-mLS/
 
 1. **Upload Shapefile**
 
-   - Prepare your landslide inventory as polygons in a shapefilex=x1(indexMidpoint:end); % the x (size bines) array for the frequeny-size distribution is defined 
+   - Prepare your landslide inventory as polygons in a shapefile% you can also use the uncertainty in the estimated power-law parameters to calculate
 
    - ZIP the shapefile (include .shp, .shx, .dbf, .prj files)
 
-   - Upload via the web interface3. **Open your browser**y=FD(indexMidpoint:end); % the y (frequency densities) array for the frequeny-size distribution is defined 
+   - Upload via the web interface3. **Open your browser**
 
 
 
-2. **Select Shapefile** (if multiple in ZIP)   - Navigate to: `http://localhost:5001`
+2. **Select Shapefile** (if multiple in ZIP)   - Navigate to: `http://localhost:5001`### Python Web Application% the uncertainty in mLS. To reach those uncertainty estimates you can open 
 
    - Choose which shapefile to analyze
 
-   - Optionally provide known beta/cutoff values or let the system estimate them   - Upload your landslide inventory shapefile (as ZIP)if beta>0           % beta value have to be negative
+   - Optionally provide known beta/cutoff values or let the system estimate them   - Upload your landslide inventory shapefile (as ZIP)
 
 
 
-3. **View Results**   - View results!    beta=-1*beta;
+3. **View Results**   - View results!- 🌐 **Browser-based interface** - No coding required% the cutoff_error.m and beta_error.m files, and use them as an input of this function.
 
    - mLS value with uncertainty
 
-   - Power-law parameters (β, cutoff)end
+   - Power-law parameters (β, cutoff)
 
    - Frequency-area distribution plot
 
-   - Inventory statistics### Manual Installationbeta_stored=beta;
+   - Inventory statistics### Manual Installation- 📁 **Shapefile upload** - Direct ZIP file support% Noted that this function can be run with or without considering the estimates of 
 
 
 
@@ -278,15 +278,15 @@ pyslide-mLS/
 
 
 
-```pythonIf the automatic script doesn't work:constant=y(1,1)/cutoff^beta;     % The c constant is calculated along the power-low where x=cutoff
+```pythonIf the automatic script doesn't work:- 🔄 **Multiple shapefile handling** - Select from multiple shapefiles in one ZIP% uncertainties. 
 
 from mls_calculator import calculate_mls
 
-import geopandas as gpdfit_y=constant*x1.^beta;        % Frequency-density values calculated for the defined power-law fit
+import geopandas as gpd
 
 
 
-# Read shapefile```bashfit_y_stored=fit_y;             
+# Read shapefile```bash- 📊 **Interactive results** - View plots and statistics in your browser
 
 gdf = gpd.read_file('landslides.shp')
 
@@ -294,31 +294,353 @@ areas = gdf.geometry.area.values# Create virtual environment
 
 
 
-# Calculate mLS (with automatic parameter estimation)python3 -m venv venvmidx=10^((log10(max(Area))+(log10(cutoff)))/2);     % The x and y values at mid-point location is read along the power-law fit
+# Calculate mLS (with automatic parameter estimation)python3 -m venv venv- 🎯 **Automatic parameter estimation** - Uses Clauset et al. (2009) method% In the following lines, the bins are defined with an array. We took 2 as 
 
 from powerlaw_estimator import estimate_powerlaw_parameters
 
-source venv/bin/activate  # On Windows: venv\Scripts\activatemidy=constant*midx^beta;
+source venv/bin/activate  # On Windows: venv\Scripts\activate
 
 beta, beta_error, cutoff, cutoff_error = estimate_powerlaw_parameters(areas)
 
-mls, uncertainty, plot = calculate_mls(areas, beta, cutoff, beta_error, cutoff_error)
+mls, uncertainty, plot = calculate_mls(areas, beta, cutoff, beta_error, cutoff_error)- 📈 **Uncertainty quantification** - Monte Carlo simulation (10,000 iterations)% the minimum bin size and we used increasing bin sizes. We increase the 
 
 
 
-print(f"mLS = {mls:.2f} ± {uncertainty:.2f}")# Install dependenciesRefmidx=4.876599623713225e+04;    % X value for the mid point of the Northridge (reference point) inventory
+print(f"mLS = {mls:.2f} ± {uncertainty:.2f}")# Install dependencies
 
 ```
 
-pip install -r requirements.txtRefmidy=8.364725347860417e-04;    % Y value for the mid point of the Northridge (reference point) inventory
+pip install -r requirements.txt- 🗺️ **Automatic CRS handling** - Converts to appropriate projected CRS for area calculation% bin widths while the landslide size increases, so that bin widths become
 
 ### MATLAB
 
-ac=Refmidy/(11111*Refmidx^beta);  % the c' constant (as) is calculated here for the mid-point of 
+
 
 ```matlab
 
+% Load data# Run the application% approximately equal in logarithmic coordinates. To create a long array for 
+
+load('matlab_original/sample_data.mat');
+
+load('matlab_original/beta.mat');python app.py
+
+load('matlab_original/cutoff.mat');
+
+load('matlab_original/beta_error.mat');```### MATLAB Implementation% the bins we tentatively pick 120 for the size of x1 vector defined below.
+
+load('matlab_original/cutoff_error.mat');
+
+
+
+% Calculate mLS
+
+[mLS_value, error] = mLS(Area, cutoff, beta, beta_error, cutoff_error);---- 🔬 **Original reference implementation** - For verification and academic usex1(1,1)=2;
+
+
+
+fprintf('mLS = %.2f ± %.2f\n', mLS_value, error);
+
+```
+
+## 📂 Repository Structure- 📐 **Direct calculation** - Command-line interface for batch processingfor i=2:120
+
+---
+
+
+
+## 🧪 Verification
+
+```    x1(1,i)=x1(1,i-1)*1.2;
+
+To verify that Python and MATLAB implementations produce identical results:
+
+pyslide-mLS/
+
+```bash
+
+# Run Python test├── app.py                      # Flask web application---end
+
+python tests/test_matlab_comparison.py
+
+├── mls_calculator.py           # Core mLS calculation module
+
+# Run MATLAB test (if you have MATLAB installed)
+
+matlab -r "cd tests; test_matlab; exit"├── powerlaw_estimator.py       # Automatic parameter estimationx2=log10(x1);
+
+```
+
+├── requirements.txt            # Python dependencies
+
+Expected output (using sample data):
+
+- **mLS**: 3.6273├── run.sh                      # Setup and launch script## 🚀 Quick Start
+
+- **Uncertainty**: ± 0.0846
+
+├── static/                     # CSS styles
+
+---
+
+├── templates/                  # HTML templatesFreq=histc(Area,x1); %Frequency values are calculated for each bin 
+
+## 📋 Requirements
+
+│   ├── index.html             # Upload page
+
+### Python
+
+- Python 3.9 or higher│   ├── select_shapefile.html  # Multiple shapefile selection### Python Web Applications=size(x1);
+
+- Flask 3.0.0
+
+- GeoPandas 1.1.1│   ├── results.html           # Results display
+
+- NumPy 2.3.4
+
+- Matplotlib 3.10.7│   └── about.html             # Documentations=s(1,2);
+
+- SciPy 1.16.3
+
+- See `requirements.txt` for complete list├── matlab_original/           # Original MATLAB implementation
+
+
+
+### MATLAB│   ├── mLS.m                  # MATLAB function1. **Clone the repository**internal=zeros(1,s);
+
+- MATLAB R2015b or higher
+
+- No additional toolboxes required│   ├── sample_data.mat        # Sample landslide areas
+
+
+
+---│   ├── beta.mat               # Sample beta value   ```bash
+
+
+
+## 📐 Methodology│   ├── beta_error.mat         # Sample beta uncertainty
+
+
+
+The mLS calculation follows these steps:│   ├── cutoff.mat             # Sample cutoff value   git clone https://github.com/geokshitij/pyslide-mLS.gitfor i=2:s
+
+
+
+1. **Load landslide areas** from shapefile polygons│   └── cutoff_error.mat       # Sample cutoff uncertainty
+
+2. **Estimate power-law parameters** using Clauset et al. (2009) method:
+
+   - **Cutoff (xmin)**: Minimum area where power-law behavior begins├── tests/                     # Test scripts and sample data   cd pyslide-mLS     internal(1,i)=x1(1,i)-x1(1,i-1);
+
+   - **Beta (β)**: Power-law exponent (slope)
+
+3. **Calculate frequency-area distribution** using logarithmic bins│   ├── test_matlab_comparison.py
+
+4. **Fit power-law** to medium/large landslides (above cutoff)
+
+5. **Compute mLS** using reference inventory (1994 Northridge)│   ├── test_installation.py   ```end
+
+6. **Quantify uncertainty** via Monte Carlo simulation (10,000 iterations)
+
+│   ├── generate_test_shapefile.py
+
+### Power-Law Distribution
+
+│   └── *.zip                  # Test shapefilesinternal(1,1)=min(x1);
+
+The frequency-area distribution follows:
+
+├── docs/                      # Additional documentation
+
+$$p(A) = c \cdot A^{\beta}$$
+
+└── output/                    # Generated outputs2. **Run the setup script**FD=Freq./internal;
+
+where:
+
+- $A$ = landslide area (m²)```
+
+- $\beta$ = power-law exponent (typically -1.4 to -3.4)
+
+- $c$ = normalization constant   ```bash
+
+
+
+### mLS Formula---
+
+
+
+$$mLS = \log_{10}\left(\frac{p(A_{mid})}{c' \cdot A_{mid}^{\beta}}\right)$$   chmod +x run.shx1_rev = abs(x1-cutoff);    % the index of value that is closest to cutoff value is identified along the x1 array 
+
+
+
+where $A_{mid}$ is the geometric mean of cutoff and maximum area.## 📊 Usage
+
+
+
+---   ./run.sh[indexMidpoint indexMidpoint] = min(x1_rev);
+
+
+
+## 🎯 Interpretation### Web Interface
+
+
+
+### mLS Scale   ```
+
+- **< 2.0**: Small event (e.g., Loma Prieta 1989, mLS = 1.75)
+
+- **2.0 - 3.5**: Moderate event (e.g., Yushu 2010, mLS = 2.76)1. **Upload Shapefile**
+
+- **3.5 - 5.0**: Large event (e.g., Kashmir 2005, mLS = 4.85)
+
+- **> 5.0**: Major/catastrophic event (e.g., Wenchuan 2008, mLS = 6.15)   - Prepare your landslide inventory as polygons in a shapefilex=x1(indexMidpoint:end); % the x (size bines) array for the frequeny-size distribution is defined 
+
+
+
+### Beta (β) Values   - ZIP the shapefile (include .shp, .shx, .dbf, .prj files)
+
+- **-1.5 to -2.0**: Relatively more large landslides
+
+- **-2.3 to -2.5**: Typical range (central tendency)   - Upload via the web interface3. **Open your browser**y=FD(indexMidpoint:end); % the y (frequency densities) array for the frequeny-size distribution is defined 
+
+- **-3.0 to -3.5**: Dominated by smaller landslides
+
+
+
+### Cutoff Point
+
+- Indicates **inventory completeness threshold**2. **Select Shapefile** (if multiple in ZIP)   - Navigate to: `http://localhost:5001`
+
+- Below cutoff: mapping limitations, undersampling
+
+- Above cutoff: reliable power-law region used for mLS   - Choose which shapefile to analyze
+
+
+
+---   - Optionally provide known beta/cutoff values or let the system estimate them   - Upload your landslide inventory shapefile (as ZIP)if beta>0           % beta value have to be negative
+
+
+
+## 📚 References
+
+
+
+**Primary Reference:**3. **View Results**   - View results!    beta=-1*beta;
+
+- Tanyas, H., Allstadt, K.E., and van Westen, C.J., 2018. An updated method for estimating landslide-event magnitude. *Earth Surface Processes and Landforms*, 43(9), 1836-1847. DOI: [10.1002/esp.4359](https://doi.org/10.1002/esp.4359)
+
+   - mLS value with uncertainty
+
+**Supporting Literature:**
+
+- Clauset, A., Shalizi, C.R., and Newman, M.E., 2009. Power-law distributions in empirical data. *SIAM Review*, 51(4), 661-703. DOI: [10.1137/070710111](https://doi.org/10.1137/070710111)   - Power-law parameters (β, cutoff)end
+
+- Malamud, B.D., Turcotte, D.L., Guzzetti, F., and Reichenbach, P., 2004. Landslide inventories and their statistical properties. *Earth Surface Processes and Landforms*, 29(6), 687-711.
+
+- Stark, C.P. and Guzzetti, F., 2009. Landslide rupture and the probability distribution of mobilized debris volumes. *Journal of Geophysical Research: Earth Surface*, 114(F2). DOI: [10.1029/2008JF001008](https://doi.org/10.1029/2008JF001008)   - Frequency-area distribution plot
+
+
+
+---   - Inventory statistics### Manual Installationbeta_stored=beta;
+
+
+
+## 🤝 Contributing
+
+
+
+Contributions are welcome! Please feel free to submit a Pull Request.### Python Module
+
+
+
+1. Fork the repository
+
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)```pythonIf the automatic script doesn't work:constant=y(1,1)/cutoff^beta;     % The c constant is calculated along the power-low where x=cutoff
+
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+
+5. Open a Pull Requestfrom mls_calculator import calculate_mls
+
+
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for more details.import geopandas as gpdfit_y=constant*x1.^beta;        % Frequency-density values calculated for the defined power-law fit
+
+
+
+---
+
+
+
+## 📄 License# Read shapefile```bashfit_y_stored=fit_y;             
+
+
+
+This software is released into the **public domain** for research and educational purposes. See [LICENSE.md](LICENSE.md) and [DISCLAIMER.md](DISCLAIMER.md) for details.gdf = gpd.read_file('landslides.shp')
+
+
+
+---areas = gdf.geometry.area.values# Create virtual environment
+
+
+
+## 🙏 Acknowledgments
+
+
+
+- Original MATLAB implementation by Hakan Tanyaş, Kate E. Allstadt, and Cees J. van Westen# Calculate mLS (with automatic parameter estimation)python3 -m venv venvmidx=10^((log10(max(Area))+(log10(cutoff)))/2);     % The x and y values at mid-point location is read along the power-law fit
+
+- Python conversion and web interface development
+
+- USGS Landslide Hazards Programfrom powerlaw_estimator import estimate_powerlaw_parameters
+
+
+
+---source venv/bin/activate  # On Windows: venv\Scripts\activatemidy=constant*midx^beta;
+
+
+
+## 📧 Contactbeta, beta_error, cutoff, cutoff_error = estimate_powerlaw_parameters(areas)
+
+
+
+For questions, issues, or suggestions:mls, uncertainty, plot = calculate_mls(areas, beta, cutoff, beta_error, cutoff_error)
+
+- **GitHub Issues**: [github.com/geokshitij/pyslide-mLS/issues](https://github.com/geokshitij/pyslide-mLS/issues)
+
+- **Citation**: If you use this tool in your research, please cite the Tanyas et al. (2018) paper
+
+
+
+---print(f"mLS = {mls:.2f} ± {uncertainty:.2f}")# Install dependenciesRefmidx=4.876599623713225e+04;    % X value for the mid point of the Northridge (reference point) inventory
+
+
+
+## 🔄 Version History```
+
+
+
+- **v1.0.0** (2025) - Initial Python implementation with web interfacepip install -r requirements.txtRefmidy=8.364725347860417e-04;    % Y value for the mid point of the Northridge (reference point) inventory
+
+  - Flask web application
+
+  - Automatic parameter estimation### MATLAB
+
+  - Multiple shapefile support
+
+  - Improved visualization (power-law fit only in valid region)ac=Refmidy/(11111*Refmidx^beta);  % the c' constant (as) is calculated here for the mid-point of 
+
+  - Comprehensive testing and verification
+
+```matlab
+
+---
+
 % Load data# Run the application                                  % the Northridge inventory as a reference point where mLS=log(11111) 
+
+**Made with ❤️ for the landslide research community**
 
 load('matlab_original/sample_data.mat');
 
