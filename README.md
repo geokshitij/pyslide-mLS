@@ -22,6 +22,7 @@ mLS (landslide-event magnitude scale) quantifies the overall size/severity of a 
 
 ### Web Application (Python)
 
+#### Linux/macOS:
 ```bash
 git clone https://github.com/geokshitij/pyslide-mLS.git
 cd pyslide-mLS
@@ -29,15 +30,47 @@ chmod +x run.sh
 ./run.sh
 ```
 
+#### Windows:
+```cmd
+git clone https://github.com/geokshitij/pyslide-mLS.git
+cd pyslide-mLS
+python -m venv venv
+venv\Scripts\activate
+pip install -r requirements.txt
+python app.py
+```
+
 Then open `http://localhost:5001` in your browser and upload a shapefile ZIP.
 
 ### Manual Installation
 
+#### Linux/macOS:
 ```bash
 python3 -m venv venv
 source venv/bin/activate
 pip install -r requirements.txt
 python app.py
+```
+
+#### Windows (Command Prompt):
+```cmd
+python -m venv venv
+venv\Scripts\activate
+pip install -r requirements.txt
+python app.py
+```
+
+#### Windows (PowerShell):
+```powershell
+python -m venv venv
+venv\Scripts\Activate.ps1
+pip install -r requirements.txt
+python app.py
+```
+
+**Note for Windows PowerShell users:** If you get an execution policy error, run:
+```powershell
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
 ```
 
 ## Features
@@ -182,14 +215,71 @@ Automatically uses the official method if the `powerlaw` package is installed, o
 
 ## Testing
 
+**Linux/macOS:**
 ```bash
 python tests/test_matlab_comparison.py
 python tests/test_installation.py
 ```
 
+**Windows:**
+```cmd
+python tests\test_matlab_comparison.py
+python tests\test_installation.py
+```
+
 Expected output with sample data:
 - mLS: 3.6273
 - Uncertainty: ±0.0846
+
+## Troubleshooting
+
+### Windows-Specific Issues
+
+**1. Python not found:**
+- Install Python from [python.org](https://www.python.org/downloads/)
+- Make sure to check "Add Python to PATH" during installation
+- Restart Command Prompt/PowerShell after installation
+
+**2. PowerShell execution policy error:**
+```powershell
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+```
+
+**3. GDAL/Fiona installation fails:**
+If you get errors installing `geopandas` or `fiona`, try:
+```cmd
+pip install pipwin
+pipwin install gdal
+pipwin install fiona
+pip install -r requirements.txt
+```
+
+Or use conda (recommended for Windows):
+```cmd
+conda create -n mls python=3.11
+conda activate mls
+conda install -c conda-forge geopandas flask matplotlib scipy powerlaw
+python app.py
+```
+
+**4. Virtual environment activation issues:**
+- Command Prompt: `venv\Scripts\activate.bat`
+- PowerShell: `venv\Scripts\Activate.ps1`
+- Git Bash: `source venv/Scripts/activate`
+
+### General Issues
+
+**Port 5001 already in use:**
+Edit `app.py` and change the port:
+```python
+app.run(debug=True, host='0.0.0.0', port=5002)  # Changed from 5001
+```
+
+**Out of memory errors:**
+Reduce Monte Carlo iterations in `mls_calculator.py`:
+```python
+n_iterations = 1000  # Default is 10000
+```
 
 ## References
 
