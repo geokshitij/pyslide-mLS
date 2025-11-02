@@ -160,15 +160,25 @@ Automatically uses the official method if the `powerlaw` package is installed, o
 
 ## Interpretation
 
-**mLS Scale:**
-- < 2.0: Small event
-- 2.0-3.5: Moderate event
-- 3.5-5.0: Large event
-- \> 5.0: Major/catastrophic event
+**mLS Scale** (based on Tanyas et al. 2018 database of 45 earthquake-induced landslide inventories):
+
+| mLS Range | Example Events | Typical # Landslides | Total Area | Description |
+|-----------|----------------|---------------------|------------|-------------|
+| < 2.5 | Loma Prieta (1989), Niigata Chuetsu-Oki (2007) | 100-600 | < 1 km² | Small localized events |
+| 2.5-3.5 | Friuli (1976), Coalinga (1983), Pisco (2007) | 200-4,000 | 1-10 km² | Small to moderate events |
+| 3.5-4.5 | Mid-Niigata (2004), Northridge (1994) | 1,000-11,000 | 10-40 km² | Moderate to large events |
+| 4.5-5.5 | Guatemala (1976), Denali (2002), Kashmir (2005) | 1,500-6,200 | 50-200 km² | Large regional events |
+| > 5.5 | Wenchuan (2008), Chi-chi (1999) | 60,000-200,000 | 500-1200 km² | Very large/catastrophic events |
+
+**Note:** These categories are interpretive based on the distribution of events in Tanyas et al. (2018). The paper does not explicitly define verbal magnitude categories.
 
 **Beta (β):** Power-law exponent (typically -1.4 to -3.4)
+- Controls the relative frequency of large vs. small landslides
+- Steeper (more negative) = fewer very large landslides
 
 **Cutoff:** Inventory completeness threshold
+- Minimum landslide area where power-law behavior begins
+- Below this, undersampling or different processes dominate
 
 ## Testing
 
