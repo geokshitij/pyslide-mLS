@@ -49,10 +49,18 @@ def estimate_powerlaw_parameters_official(areas, xmin_range=None):
     """
     areas = np.array(areas)
     areas = areas[areas > 0]
+    areas_sorted = np.sort(areas)
     
     # Fit power-law using official package
-    fit = powerlaw.Fit(areas, xmin=xmin_range[0] if xmin_range else None, 
-                       xmax=xmin_range[1] if xmin_range else None)
+    # Provide xmin search range - from 5th to 50th percentile
+    # This allows the algorithm to find lower cutoffs if appropriate
+    if xmin_range is None:
+        # Set search range for xmin (as tuple of min, max)
+        xmin_min = np.percentile(areas, 5)
+        xmin_max = np.percentile(areas, 50)
+        fit = powerlaw.Fit(areas, xmin=(xmin_min, xmin_max))
+    else:
+        fit = powerlaw.Fit(areas, xmin=(xmin_range[0], xmin_range[1]))
     
     # Get parameters
     cutoff = fit.power_law.xmin
