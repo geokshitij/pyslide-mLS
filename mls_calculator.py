@@ -140,10 +140,10 @@ def calculate_mls(area, cutoff, beta, beta_error=None, cutoff_error=None):
         error = np.std(mls_array)
     
     # Create plot
-    fig, ax = plt.subplots(figsize=(10, 8))
+    fig, ax = plt.subplots(figsize=(6, 5))
     
     # Plot all frequency density points (blue circles)
-    ax.loglog(x1, fd, 'o', markersize=8, markerfacecolor='b', 
+    ax.loglog(x1, fd, 'o', markersize=5, markerfacecolor='b', 
               markeredgecolor='k', label='Observed data density')
     
     # Plot power-law fit ONLY in the power-law region (from cutoff onwards)

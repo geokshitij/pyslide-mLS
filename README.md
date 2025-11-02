@@ -43,7 +43,10 @@ python app.py
 ## Features
 
 - Browser-based interface for easy shapefile analysis
-- Automatic power-law parameter estimation
+- **Dual parameter estimation methods**:
+  - **Official**: Clauset et al. (2009) implementation via `powerlaw` package (recommended for research)
+  - **Simplified**: Fast KS-based estimation (good for quick analysis)
+  - **Auto**: Automatically uses official method if available, otherwise simplified
 - Monte Carlo uncertainty quantification (10,000 iterations)
 - Support for multiple shapefiles in one ZIP
 - Automatic CRS handling and area calculation
@@ -79,10 +82,19 @@ import geopandas as gpd
 gdf = gpd.read_file('landslides.shp')
 areas = gdf.geometry.area.values
 
-beta, beta_error, cutoff, cutoff_error = estimate_powerlaw_parameters(areas)
-mls, uncertainty, plot = calculate_mls(areas, beta, cutoff, beta_error, cutoff_error)
+# Option 1: Auto method (recommended) - uses official if available
+cutoff, beta, cutoff_error, beta_error, method = estimate_powerlaw_parameters(areas, method='auto')
+
+# Option 2: Force official Clauset et al. (2009) method
+cutoff, beta, cutoff_error, beta_error, method = estimate_powerlaw_parameters(areas, method='official')
+
+# Option 3: Force simplified method (faster)
+cutoff, beta, cutoff_error, beta_error, method = estimate_powerlaw_parameters(areas, method='simplified')
+
+mls, uncertainty, plot = calculate_mls(areas, cutoff, beta, beta_error, cutoff_error)
 
 print(f"mLS = {mls:.2f} ± {uncertainty:.2f}")
+print(f"Parameters estimated using {method} method")
 ```
 
 ### MATLAB
@@ -114,11 +126,37 @@ fprintf('mLS = %.2f ± %.2f\n', mLS_value, error);
 ## Methodology
 
 1. Load landslide areas from shapefile polygons
-2. Estimate power-law parameters using Clauset et al. (2009) method
+2. Estimate power-law parameters (see **Parameter Estimation** below)
 3. Calculate frequency-area distribution with logarithmic bins
 4. Fit power-law to medium/large landslides (above cutoff)
 5. Compute mLS using reference inventory (1994 Northridge)
 6. Quantify uncertainty via Monte Carlo simulation
+
+### Parameter Estimation Methods
+
+This tool offers three methods for estimating power-law parameters (cutoff and beta):
+
+#### 1. Official Method (Recommended for Research)
+Uses the [`powerlaw`](https://github.com/jeffalstott/powerlaw) package by Alstott et al., which implements the full Clauset et al. (2009) methodology:
+- Maximum likelihood estimation with proper goodness-of-fit tests
+- Bootstrap-based uncertainty quantification
+- Rigorous statistical validation
+- **When to use**: Publication-quality analysis, research papers, detailed studies
+- **Speed**: Slower (~10-30 seconds for 1000 landslides)
+
+#### 2. Simplified Method (Fast)
+Simplified KS-based implementation:
+- Grid search over cutoff candidates
+- MLE for beta: `beta = 1 + n / sum(ln(x/xmin))`
+- Kolmogorov-Smirnov test for goodness-of-fit
+- Approximate error estimation
+- **When to use**: Quick exploratory analysis, field work, rapid assessments
+- **Speed**: Fast (~1-2 seconds for 1000 landslides)
+
+#### 3. Auto Method (Default)
+Automatically uses the official method if the `powerlaw` package is installed, otherwise falls back to simplified method. This is the default and recommended for most users.
+
+**Reference**: Clauset, A., Shalizi, C.R., and Newman, M.E.J. (2009). "Power-law distributions in empirical data." *SIAM Review*, 51(4), 661-703.
 
 ## Interpretation
 

@@ -213,6 +213,20 @@
                     {% endif %}
                 </td>
             </tr>
+            {% if results.estimation_method %}
+            <tr>
+                <td><strong>Estimation Method</strong></td>
+                <td colspan="2">
+                    {% if results.estimation_method == 'official' %}
+                        <span style="color: #28a745; font-weight: 500;">✓ Official Clauset et al. (2009)</span>
+                    {% elif results.estimation_method == 'simplified' %}
+                        <span style="color: #ffc107; font-weight: 500;">⚡ Simplified KS-based</span>
+                    {% else %}
+                        <span style="color: #6c757d;">{{ results.estimation_method }}</span>
+                    {% endif %}
+                </td>
+            </tr>
+            {% endif %}
         </table>
     </div>
     

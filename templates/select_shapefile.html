@@ -203,6 +203,25 @@
                 Leave these fields empty to automatically estimate power-law parameters from your data.
             </p>
             
+            <div class="form-group" style="margin-bottom: 25px;">
+                <label>Parameter Estimation Method</label>
+                <div style="display: flex; gap: 20px; margin-top: 10px;">
+                    <label style="display: flex; align-items: center; cursor: pointer;">
+                        <input type="radio" name="estimation_method" value="auto" checked style="width: auto; margin-right: 8px;">
+                        <span><strong>Auto</strong> - Use official method if available</span>
+                    </label>
+                    <label style="display: flex; align-items: center; cursor: pointer;">
+                        <input type="radio" name="estimation_method" value="official" style="width: auto; margin-right: 8px;">
+                        <span><strong>Official</strong> - Clauset et al. (2009) powerlaw package</span>
+                    </label>
+                    <label style="display: flex; align-items: center; cursor: pointer;">
+                        <input type="radio" name="estimation_method" value="simplified" style="width: auto; margin-right: 8px;">
+                        <span><strong>Simplified</strong> - Fast estimation</span>
+                    </label>
+                </div>
+                <p class="help-text">Only applies when parameters are auto-estimated (left blank above)</p>
+            </div>
+            
             {% if original_params %}
             <div class="form-row">
                 <div class="form-group">

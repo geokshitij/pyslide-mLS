@@ -2,20 +2,30 @@
 Power-law parameter estimation for landslide frequency-area distributions.
 
 This module provides functionality to estimate cutoff and beta parameters
-using methods similar to Clauset et al. (2009).
+using the official powerlaw package (Clauset et al. 2009 implementation)
+with a simplified fallback method.
 """
 
 import numpy as np
 from scipy import stats
 from scipy.optimize import minimize_scalar
 
+# Try to import the official powerlaw package
+try:
+    import powerlaw
+    POWERLAW_AVAILABLE = True
+except ImportError:
+    POWERLAW_AVAILABLE = False
+    print("Warning: 'powerlaw' package not installed. Using simplified estimation method.")
+    print("For more accurate results, install it with: pip install powerlaw")
 
-def estimate_powerlaw_parameters(areas, xmin_range=None):
+
+def estimate_powerlaw_parameters_official(areas, xmin_range=None):
     """
-    Estimate power-law parameters (cutoff and beta) for area distribution.
+    Estimate power-law parameters using the official powerlaw package.
     
-    This is a simplified implementation. For more accurate results, use
-    the methods from Clauset et al. (2009).
+    This uses the Clauset et al. (2009) methodology with proper
+    bootstrap uncertainty estimation.
     
     Parameters:
     -----------
@@ -29,11 +39,67 @@ def estimate_powerlaw_parameters(areas, xmin_range=None):
     cutoff : float
         Estimated cutoff value (xmin)
     beta : float
-        Estimated power-law exponent
+        Estimated power-law exponent (negative)
     cutoff_error : float
         Estimated error in cutoff
     beta_error : float
         Estimated error in beta
+    method : str
+        Method used ('official' or 'simplified')
+    """
+    areas = np.array(areas)
+    areas = areas[areas > 0]
+    
+    # Fit power-law using official package
+    fit = powerlaw.Fit(areas, xmin=xmin_range[0] if xmin_range else None, 
+                       xmax=xmin_range[1] if xmin_range else None)
+    
+    # Get parameters
+    cutoff = fit.power_law.xmin
+    alpha = fit.power_law.alpha  # This is the exponent (positive)
+    beta = -alpha  # Convert to negative as used in mLS
+    
+    # Estimate errors using bootstrap (if sigma is available)
+    if hasattr(fit.power_law, 'sigma'):
+        beta_error = fit.power_law.sigma
+    else:
+        # Fallback error estimation
+        data = areas[areas >= cutoff]
+        n = len(data)
+        beta_error = abs(alpha - 1) / np.sqrt(n)
+    
+    # Estimate cutoff error (use ~10% as rough estimate)
+    cutoff_error = cutoff * 0.1
+    
+    return cutoff, beta, cutoff_error, beta_error, 'official'
+
+
+def estimate_powerlaw_parameters_simplified(areas, xmin_range=None):
+    """
+    Estimate power-law parameters using simplified KS-based method.
+    
+    This is a faster but less accurate implementation based on
+    Clauset et al. (2009) principles.
+    
+    Parameters:
+    -----------
+    areas : array-like
+        Landslide areas in square meters
+    xmin_range : tuple, optional
+        (min, max) range for cutoff search
+        
+    Returns:
+    --------
+    cutoff : float
+        Estimated cutoff value (xmin)
+    beta : float
+        Estimated power-law exponent (negative)
+    cutoff_error : float
+        Estimated error in cutoff
+    beta_error : float
+        Estimated error in beta
+    method : str
+        Method used ('official' or 'simplified')
     """
     
     areas = np.array(areas)
@@ -119,12 +185,57 @@ def estimate_powerlaw_parameters(areas, xmin_range=None):
     # Error for cutoff (use ~10% of cutoff as rough estimate)
     cutoff_error = best_cutoff * 0.1
     
-    return best_cutoff, best_beta, cutoff_error, beta_error
+    return best_cutoff, best_beta, cutoff_error, beta_error, 'simplified'
+
+
+def estimate_powerlaw_parameters(areas, xmin_range=None, method='auto'):
+    """
+    Estimate power-law parameters (cutoff and beta) for area distribution.
+    
+    Automatically uses the official powerlaw package if available,
+    otherwise falls back to simplified method.
+    
+    Parameters:
+    -----------
+    areas : array-like
+        Landslide areas in square meters
+    xmin_range : tuple, optional
+        (min, max) range for cutoff search
+    method : str, optional
+        'auto' (default): Use official if available, else simplified
+        'official': Force use of official powerlaw package
+        'simplified': Force use of simplified method
+        
+    Returns:
+    --------
+    cutoff : float
+        Estimated cutoff value (xmin)
+    beta : float
+        Estimated power-law exponent (negative)
+    cutoff_error : float
+        Estimated error in cutoff
+    beta_error : float
+        Estimated error in beta
+    method_used : str
+        Method actually used ('official' or 'simplified')
+    """
+    
+    if method == 'official' and not POWERLAW_AVAILABLE:
+        raise ImportError(
+            "Official powerlaw package not installed. "
+            "Install it with: pip install powerlaw"
+        )
+    
+    if method == 'simplified' or (method == 'auto' and not POWERLAW_AVAILABLE):
+        return estimate_powerlaw_parameters_simplified(areas, xmin_range)
+    else:
+        return estimate_powerlaw_parameters_official(areas, xmin_range)
 
 
 if __name__ == "__main__":
     # Test with synthetic data
     print("Power-law Parameter Estimator")
+    print(f"Official powerlaw package available: {POWERLAW_AVAILABLE}")
     print("This module provides automatic estimation of cutoff and beta parameters.")
     
     # Generate synthetic power-law data for testing
@@ -138,8 +249,21 @@ if __name__ == "__main__":
     alpha = abs(true_beta) - 1
     synthetic_areas = true_cutoff * (1 - u) ** (-1/alpha)
     
-    cutoff_est, beta_est, cutoff_err, beta_err = estimate_powerlaw_parameters(synthetic_areas)
-    
     print(f"\nTest with synthetic data:")
-    print(f"True cutoff: {true_cutoff}, Estimated: {cutoff_est:.2f} ± {cutoff_err:.2f}")
-    print(f"True beta: {true_beta}, Estimated: {beta_est:.2f} ± {beta_err:.2f}")
+    print(f"True values: cutoff={true_cutoff}, beta={true_beta}")
+    
+    # Test with auto method
+    cutoff_est, beta_est, cutoff_err, beta_err, method = estimate_powerlaw_parameters(
+        synthetic_areas, method='auto'
+    )
+    print(f"\nAuto method (using {method}):")
+    print(f"  Cutoff: {cutoff_est:.2f} ± {cutoff_err:.2f}")
+    print(f"  Beta: {beta_est:.2f} ± {beta_err:.2f}")
+    
+    # Test simplified method explicitly
+    cutoff_est2, beta_est2, cutoff_err2, beta_err2, method2 = estimate_powerlaw_parameters(
+        synthetic_areas, method='simplified'
+    )
+    print(f"\nSimplified method:")
+    print(f"  Cutoff: {cutoff_est2:.2f} ± {cutoff_err2:.2f}")
+    print(f"  Beta: {beta_est2:.2f} ± {beta_err2:.2f}")

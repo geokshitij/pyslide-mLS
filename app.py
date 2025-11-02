@@ -162,11 +162,15 @@ def upload_file():
         beta = request.form.get('beta', type=float)
         beta_error = request.form.get('beta_error', type=float)
         cutoff_error = request.form.get('cutoff_error', type=float)
+        estimation_method = request.form.get('estimation_method', 'auto')
         
         # If parameters not provided, estimate them
+        method_used = None
         if cutoff is None or beta is None:
-            flash('Estimating power-law parameters automatically...', 'info')
-            estimated_cutoff, estimated_beta, est_cutoff_err, est_beta_err = estimate_powerlaw_parameters(areas)
+            method_name = {'auto': 'automatic', 'official': 'Clauset et al. (2009)', 'simplified': 'simplified'}
+            flash(f'Estimating power-law parameters using {method_name.get(estimation_method, "automatic")} method...', 'info')
+            estimated_cutoff, estimated_beta, est_cutoff_err, est_beta_err, method_used = estimate_powerlaw_parameters(areas, method=estimation_method)
+            flash(f'Parameters estimated using {method_used} method', 'success')
             
             if cutoff is None:
                 cutoff = estimated_cutoff
@@ -190,6 +194,7 @@ def upload_file():
             'cutoff': float(cutoff),
             'beta_error': float(beta_error) if beta_error is not None else None,
             'cutoff_error': float(cutoff_error) if cutoff_error is not None else None,
+            'estimation_method': method_used,
             'feature_count': int(feature_count),
             'valid_areas_count': int(len(areas)),
             'min_area': float(np.min(areas)),
@@ -247,10 +252,16 @@ def process_selected():
             shutil.rmtree(temp_dir)
             return redirect(url_for('index'))
         
+        # Get estimation method
+        estimation_method = request.form.get('estimation_method', 'auto')
+        
         # Estimate parameters if not provided
+        method_used = None
         if cutoff is None or beta is None:
-            flash('Estimating power-law parameters automatically...', 'info')
-            estimated_cutoff, estimated_beta, est_cutoff_err, est_beta_err = estimate_powerlaw_parameters(areas)
+            method_name = {'auto': 'automatic', 'official': 'Clauset et al. (2009)', 'simplified': 'simplified'}
+            flash(f'Estimating power-law parameters using {method_name.get(estimation_method, "automatic")} method...', 'info')
+            estimated_cutoff, estimated_beta, est_cutoff_err, est_beta_err, method_used = estimate_powerlaw_parameters(areas, method=estimation_method)
+            flash(f'Parameters estimated using {method_used} method', 'success')
             
             if cutoff is None:
                 cutoff = estimated_cutoff
@@ -274,6 +285,7 @@ def process_selected():
             'cutoff': float(cutoff),
             'beta_error': float(beta_error) if beta_error is not None else None,
             'cutoff_error': float(cutoff_error) if cutoff_error is not None else None,
+            'estimation_method': method_used,
             'feature_count': int(feature_count),
             'valid_areas_count': int(len(areas)),
             'min_area': float(np.min(areas)),
